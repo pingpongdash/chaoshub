@@ -1,0 +1,57 @@
+.dialog-box {
+    display          : none ;
+    width            : 24em ;
+    top              : 8em  ;
+    left             : calc(50% - 10em) ;
+    border           : solid var(--theme-color) ;
+    border-radius    : 0.5em ;
+    box-shadow       : 3px 3px 1px var(--shadow-color);
+    background-color : var(--box-background) ;
+}
+
+.dialog-title-wrap {
+    background    : var(--reverse-background) ;
+    position      : relative ;
+    font-weight   : bold   ;
+    border-radius : 2px    ;
+    margin-bottom : 0.5em  ;
+    user-select   : none   ;
+    height        : 2em    ;
+    text-align    : center ;
+}
+
+.dialog-title {
+    position    : unset ;
+    top         : unset ;
+    left        : unset ;
+    height      : 2em   ;
+    width       : 80%   ;
+    line-height : 2em   ;
+    display     : inline-block ;
+}
+
+.dialog-title p {
+    color : var(--text-reverse) ;
+}
+
+.dialog-message-wrap  {
+    position    : relative ;
+    margin-top  : 1em   ;
+    font-size   : 1em   ;
+    line-height : 1em   ;
+    width       : 16em  ;
+    left        : calc(50% - 8em) ;
+    text-align  : center ;
+}
+
+.dialog-message {
+    line-height   : 1.5em  ;
+    margin-bottom : 0.5em  ;
+    text-align    : center ;
+    white-space   : nowrap ;
+    color         : var(--text-color) ;
+}
+
+.button-area-dialog {
+    margin-top : 2em ;
+}

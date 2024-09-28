@@ -1,0 +1,12 @@
+responders:
+  - responder:
+    request: default
+    class: DefaulTop
+    permissions:
+    - any
+
+  - responder:
+    request: maintenance
+    class: Maintenance
+    permissions:
+    - any

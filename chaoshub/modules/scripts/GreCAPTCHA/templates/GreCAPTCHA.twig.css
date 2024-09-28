@@ -1,0 +1,19 @@
+/**** recapcha ****/
+.g-recaptcha-wrap {
+    position        : relative ;
+    margin-top      : 1em  ;
+}
+
+.g-recaptcha-body {
+    display         : flex ;
+    justify-content : center;    
+}
+
+.g-recaptcha {
+    display: block ;
+}
+
+.g-recaptcha-disable {
+    pointer-events : none;
+}
+

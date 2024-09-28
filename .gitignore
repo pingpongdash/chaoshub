@@ -1,0 +1,4 @@
+vendor/
+composer.lock
+docment_root/
+settings.yml

@@ -1,0 +1,57 @@
+version: '3.8'
+services:
+  fcgi:
+    hostname: fcgi
+    container_name: fcgi
+    image: fcgi
+    tty: true
+    build:
+      context: .
+      args:
+        APP_USER: ${APP_USER}
+        APP_RUN_USER: ${APP_RUN_USER}
+        APP_RUN_GROUP: ${APP_RUN_GROUP}
+        SHELL: ${SHELL}
+        APP_RUN_UID: ${APP_RUN_UID}
+        APP_RUN_GID: ${APP_RUN_GID}
+        SERVER_NAME: ${SERVER_NAME}
+        SERVER_ADMIN: ${SERVER_ADMIN}
+        WEBAPP: ${WEBAPP}
+        CONTENTS_ROOT: ${CONTENTS_ROOT}
+    dns: 8.8.8.8
+    networks:
+    - chaoshub
+    environment:
+      APP_USER: ${APP_USER}
+      APP_RUN_USER: ${APP_RUN_USER}
+      APP_RUN_GROUP: ${APP_RUN_GROUP}
+      SHELL: ${SHELL}
+      APP_RUN_UID: ${APP_RUN_UID}
+      APP_RUN_GID: ${APP_RUN_GID}
+      SERVER_NAME: ${SERVER_NAME}
+      SERVER_ADMIN: ${SERVER_ADMIN}
+      WEBAPP: ${WEBAPP}
+      CONTENTS_ROOT: ${CONTENTS_ROOT}
+    volumes:
+    - source: $CONTENTS_ROOT/docroot
+      target: /var/www/html
+      type: bind
+    - source: $CONTENTS_ROOT/webapp
+      target: /var/www/app
+      type: bind
+    - source: $CONTENTS_ROOT/chaoshub
+      target: /var/www/chaoshub
+      type: bind
+    - source: ${BASE_DIRECTORY}/php-fpm.conf/www.conf
+      target: /usr/local/etc/php-fpm.d/www.conf
+      type: bind
+    - source: ${BASE_DIRECTORY}/php.conf/browscap.ini
+      target: /usr/local/etc/php/browscap.ini
+      type: bind
+    - source: ${BASE_DIRECTORY}/php.conf/php.ini
+      target: /usr/local/etc/php/php.ini
+      type: bind
+networks:
+  chaoshub:
+    driver: bridge
+    name: chaoshub

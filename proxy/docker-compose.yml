@@ -1,0 +1,63 @@
+version: '3.8'
+services:
+  proxy:
+    hostname: proxy
+    container_name: proxy
+    image: proxy
+    tty: true
+    build:
+      context: .
+      args:
+        APP_USER: ${APP_USER}
+        SHELL: ${SHELL}
+        APACHE_RUN_UID: ${APACHE_RUN_UID}
+        APACHE_RUN_GID: ${APACHE_RUN_GID}
+        APACHE_RUN_USER: ${APACHE_RUN_USER}
+        APACHE_RUN_GROUP: ${APACHE_RUN_GROUP}
+        SERVER_NAME: ${SERVER_NAME}
+        SERVER_ADMIN: ${SERVER_ADMIN}
+        FCGI_HOST: ${FCGI_HOST}
+        FCGI_PORT: ${FCGI_PORT}
+        FCGI_ROOT: ${FCGI_ROOT}
+        SERVER_DATA: ${SERVER_DATA}
+        CONTENTS_ROOT: ${CONTENTS_ROOT}
+        SSL_KEY_DIR: ${SSL_KEY_DIR}
+    dns: 8.8.8.8
+    networks:
+    - chaoshub
+    environment:
+      APP_USER: ${APP_USER}
+      SHELL: ${SHELL}
+      APACHE_RUN_UID: ${APACHE_RUN_UID}
+      APACHE_RUN_GID: ${APACHE_RUN_GID}
+      APACHE_RUN_USER: ${APACHE_RUN_USER}
+      APACHE_RUN_GROUP: ${APACHE_RUN_GROUP}
+      SERVER_NAME: ${SERVER_NAME}
+      SERVER_ADMIN: ${SERVER_ADMIN}
+      FCGI_HOST: ${FCGI_HOST}
+      FCGI_PORT: ${FCGI_PORT}
+      FCGI_ROOT: ${FCGI_ROOT}
+      SERVER_DATA: ${SERVER_DATA}
+      CONTENTS_ROOT: ${CONTENTS_ROOT}
+      SSL_KEY_DIR: ${SSL_KEY_DIR}
+    volumes:
+    - source: ${SERVER_DATA}/conf/httpd.conf
+      target: /usr/local/apache2/conf/httpd.conf
+      type: bind
+    - source: ${SERVER_DATA}/conf/ssl.conf
+      target: /usr/local/apache2/conf/ssl.conf
+      type: bind
+    - source: ${SERVER_DATA}/vhosts.d
+      target: /usr/local/apache2/vhosts.d
+      type: bind
+    - source: ${CONTENTS_ROOT}/docroot
+      target: /var/www/html
+      type: bind
+    restart: always
+    ports:
+    - 80:80
+    - 443:443
+networks:
+  chaoshub:
+    driver: bridge
+    name: chaoshub
