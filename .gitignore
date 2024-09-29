@@ -1,4 +1,6 @@
 vendor/
 composer.lock
-docment_root/
+
+document_root/
+transfer_root/
 settings.yml
