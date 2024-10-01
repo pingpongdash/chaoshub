@@ -10,3 +10,14 @@ responders:
     class: Maintenance
     permissions:
     - any
+
+  - responder:
+    request: info/sys
+    class: Info
+    permissions:
+    - any
+  - responder:
+    request: info/client
+    class: ClientInfo
+    permissions:
+    - any
