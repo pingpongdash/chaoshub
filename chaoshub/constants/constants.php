@@ -21,10 +21,8 @@ const MODULES_DIR           = SF_ROOT.'/modules/' ;
 
 const APP_SETTINGS_DIR      = APP_DIR.'appconfig' ;
 const APP_SETTINGS          = 'appconfig'       ;
-// const APP_SETTINGS          = 'appconfig.xml'       ;
-// const APP_SETTINGS          = 'appconfig.yml'       ;
 const VENDOR_DIR            = SF_ROOT.'/vendor/'    ;
 
 const RANDOMSEED            = 'abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ';
 const DEFAULT_RANDOM_LENGTH = 32 ;
-const REQUEST_REGEXP        = '/^[a-z]+$/';
+const REQUEST_REGEXP        = '/^[a-z\/\-_]+$/';

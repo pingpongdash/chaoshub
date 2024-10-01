@@ -38,6 +38,12 @@ $pathFinder->findPath(APP_DIR.'modules/',['store','templates'])  ;
 require_once 'Responder.php' ;
 
 $request = filter_input(INPUT_POST, 'request', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ;
+if (empty($request)) {
+    $requestUri = $_SERVER['REQUEST_URI'];
+    $parsedUri = parse_url($requestUri, PHP_URL_PATH);
+    $parsedUri = trim($parsedUri, '/');
+    $request = !empty($parsedUri) ? $parsedUri : 'default';
+}
 $request = filter_var($request, FILTER_VALIDATE_REGEXP,
     array('options' => array('regexp' => REQUEST_REGEXP))) ;
 $request = ($request)? $request:'default' ;
@@ -47,4 +53,3 @@ if(empty($responder)) {
     exit ;
 }
 $responder->respond() ;
-

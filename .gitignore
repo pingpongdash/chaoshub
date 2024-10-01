@@ -1,6 +1,5 @@
 vendor/
 composer.lock
 
-document_root/
-transfer_root/
+browscap.ini
 settings.yml

@@ -25,8 +25,11 @@ class Examiner extends ObjectBase {
 
     public function examine(array $inspectionItems) {
         $result['status'] = 'allowed' ;
-        if(!empty($inspectionItems['useragent'])) {
+        if(!empty($inspectionItems['useragent']) && $inspectionItems['useragent'] !== 'any') {
             $result = $this->examineUserAgent($inspectionItems['useragent']) ;
+        }
+        if(!empty($inspectionItems['remote']) && $inspectionItems['remote'] !== 'any') {
+            $result = $this->examineRemote($inspectionItems['remote']) ;
         }
         return $result ;
     }
@@ -96,6 +99,18 @@ class Examiner extends ObjectBase {
         }
         return $result ;
     }
+
+    function ip_in_subnet($ip, $subnet) {
+        list($subnet_ip, $mask) = explode('/', $subnet);
+        $ip_binary = ip2long($ip);
+        $subnet_binary = ip2long($subnet_ip);
+        $mask_binary = ~((1 << (32 - $mask)) - 1);
+        return ($ip_binary & $mask_binary) == ($subnet_binary & $mask_binary);
+    }
+
+    private function examineRemote(&$inspectionItems): array {
+        $result = [] ;
+        $in_subnet = $this->ip_in_subnet($_SERVER['REMOTE_ADDR'], SUBNET_CIDR) ;
+        return $result ;
+    }
 }
-
-
