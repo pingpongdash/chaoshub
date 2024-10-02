@@ -38,6 +38,9 @@ class XMLProcessor extends ObjectBase {
     public function load(string $path, string $name): array|bool {
         $path = $this->getPath($path) ;
         $name = $this->getFileName($name) ;
+        if(!file_exists($path.$name)) {
+            return false ;
+        }
         $xml = simplexml_load_file($path.$name) ;
         if($xml === false) {
             return $xml ;
@@ -62,7 +65,7 @@ class XMLProcessor extends ObjectBase {
             if(is_array($value)) {
                 if(isset($value['external']) &&
                    strtolower($value['external']) === 'yes' ) {
-                    $haystack[$key] = $this->readExternal($storepath,$value) ; 
+                    $haystack[$key] = $this->readExternal($storepath,$value) ;
                 }
                 else {
                     $value = $this->drilling($storepath,$value) ;
@@ -73,7 +76,7 @@ class XMLProcessor extends ObjectBase {
             }
         }
         return $haystack ;
-    } 
+    }
 
     private function readExternal(string $storepath ,array $value){
         if(strtolower($value['drilling']) === 'no') {

@@ -66,7 +66,6 @@ class YAMLProcessor extends ObjectBase {
                     if(!empty($value)) {
                         $value = $this->drilling($storepath,$value) ;
                     }
-
                 }
             }
             else {
