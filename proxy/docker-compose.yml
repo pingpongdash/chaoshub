@@ -21,6 +21,7 @@ services:
         FCGI_ROOT: ${FCGI_ROOT}
         SERVER_DATA: ${SERVER_DATA}
         CONTENTS_ROOT: ${CONTENTS_ROOT}
+        USE_SSL: ${USE_SSL}
         SSL_KEY_DIR: ${SSL_KEY_DIR}
     dns: 8.8.8.8
     networks:
@@ -39,6 +40,7 @@ services:
       FCGI_ROOT: ${FCGI_ROOT}
       SERVER_DATA: ${SERVER_DATA}
       CONTENTS_ROOT: ${CONTENTS_ROOT}
+      USE_SSL: ${USE_SSL}
       SSL_KEY_DIR: ${SSL_KEY_DIR}
     volumes:
     - source: ${SERVER_DATA}/conf/httpd.conf
@@ -57,6 +59,9 @@ services:
     ports:
     - 80:80
     - 443:443
+    command: "sh -c \"if [ \\\"$USE_SSL\\\" = \\\"yes\\\" ]; then\n          httpd\
+      \ -D FOREGROUND -D USE_SSL;\n        else\n          httpd -D FOREGROUND;\n\
+      \        fi\"\n"
 networks:
   chaoshub:
     driver: bridge
