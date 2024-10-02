@@ -19,3 +19,10 @@ declare(strict_types=1);
 const APP_ROOT      = __DIR__            ;
 const STORE_PATH    = APP_ROOT.'/store/' ;
 const TEMPLATE_PATH = APP_ROOT.'/templates/' ;
+
+const LOGGING  = true ;
+const LOG_PATH = '/proc/self/fd/' ;
+const DEBUG_LOG_FILE = '1' ;
+const INFO_LOG_FILE  = '1' ;
+const TRACE_LOG_FILE = '1' ;
+const ERROR_LOG_FILE = '1' ;
