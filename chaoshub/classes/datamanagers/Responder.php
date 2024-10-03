@@ -39,6 +39,12 @@ class Responder extends ObjectBase {
         $confproc   = new YAMLProcessor() ;
         $appconfig  = $confproc->load(APP_SETTINGS_DIR,APP_SETTINGS) ;
         $responders = $appconfig['responders'] ;
+        $requestKeys = array_column($responders, 'request');
+        if (!in_array('default', $requestKeys)) {
+            $request='internalerror' ;
+            D('default responder not found') ;
+            // throw new Exception("Error: 'default' responder not found in the configuration.");
+        }
         foreach($responders as $key => $responder) {
             if(!empty($responder['request']) && $responder['request'] === $request) {
                 $settings = self::getSettings($responder) ;

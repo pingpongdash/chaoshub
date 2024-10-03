@@ -55,6 +55,9 @@ services:
     - source: ${CONTENTS_ROOT}/docroot
       target: /var/www/html
       type: bind
+    - source: ${SERVER_DATA}/ssl_certs
+      target: /var/www/ssl
+      type: bind
     restart: always
     ports:
     - 80:80
