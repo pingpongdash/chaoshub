@@ -25,4 +25,4 @@ const VENDOR_DIR            = SF_ROOT.'/vendor/'    ;
 
 const RANDOMSEED            = 'abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ';
 const DEFAULT_RANDOM_LENGTH = 32 ;
-const REQUEST_REGEXP        = '/^[a-z\/\-_]+$/';
+const REQUEST_REGEXP        = '/^[a-z\/\-_.]+$/';

@@ -15,8 +15,10 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **************************************************************************/
+require_once APP_DIR.'cominclude.php' ;
+require_once 'ResponderBase.php' ;
 
-class ClientInfo  {
+class ClientInfo extends ResponderBase {
 
     public function __construct(?array $permissions) {
     }
@@ -24,16 +26,16 @@ class ClientInfo  {
     public function respond() {
         $headers = apache_request_headers();
         $browserData = get_browser(null, true);
-        echo "<table border='1' cellpadding='5' cellspacing='0'>";
-        echo "<tr><th>Key</th><th>Value</th></tr>";
+        $response = '' ;
         foreach ($browserData as $key => $value) {
-            echo "<tr><td>{$key}</td><td>" . htmlspecialchars($value, ENT_QUOTES, 'UTF-8') . "</td></tr>";
+            $envKey = strtoupper(str_replace(' ', '_', $key));
+            $response .= "{$envKey}=" . escapeshellarg($value) . "\n";
         }
         foreach ($headers as $key => $value) {
-            echo "<tr><td>{$key}</td><td>{$value}</td></tr>";
+            $envKey = strtoupper(str_replace('-', '_', $key));
+            $response .= "{$envKey}=" . escapeshellarg($value) . "\n";
         }
-        echo "</table>";
-        exit ;
+        $this->sendText($response) ;
     }
     public function setClient($client){}
 }

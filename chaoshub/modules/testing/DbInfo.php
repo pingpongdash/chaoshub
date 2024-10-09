@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /*************************************************************************
     Copyright 2020  HALCYON CYBERNETICS
 
@@ -14,13 +15,12 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 **************************************************************************/
-declare(strict_types=1);
 
 require_once APP_DIR.'cominclude.php' ;
 require_once 'ResponderBase.php' ;
 require_once 'HTTPProcessor.php' ;
 
-class dbInfo extends ResponderBase {
+class DbInfo extends ResponderBase {
 
 	public function __construct(?array $post) {
 		parent::__construct($post) ;
