@@ -18,19 +18,25 @@ declare(strict_types=1);
 
 class PathFinder {
     public function findPath(string $directory, array $excludes = []) {
+        if (!is_dir($directory)) {
+            return ;
+        }
         if (!$directoryHandler = opendir($directory)) {
             throw new \Exception("Cannot open directory: $directory") ;
         }
-        set_include_path(get_include_path().PATH_SEPARATOR.$directory) ;
+        set_include_path(get_include_path() . PATH_SEPARATOR . $directory) ;
         while (($file = readdir($directoryHandler)) !== false) {
-            if ($file === '.' || $file === '..') continue;
-            if (in_array($file, $excludes, true)) continue;
-            $filePath = $directory . DIRECTORY_SEPARATOR . $file;
+            if ($file === '.' || $file === '..') {
+                continue ;
+            }
+            if (in_array($file, $excludes, true)) {
+                continue ;
+            }
+            $filePath = $directory . DIRECTORY_SEPARATOR . $file ;
             if (is_dir($filePath)) {
-                set_include_path(get_include_path() . PATH_SEPARATOR . $filePath);
-                $this->findPath($filePath . DIRECTORY_SEPARATOR, $excludes);
+                $this->findPath($filePath, $excludes) ;
             }
         }
-        closedir($directoryHandler);
+        closedir($directoryHandler) ;
     }
 }
