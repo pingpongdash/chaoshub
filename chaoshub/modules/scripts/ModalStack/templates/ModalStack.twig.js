@@ -72,7 +72,7 @@ ModalStack = (()=> {
         if(target) {
             let width  = window.innerWidth  ;
             let height = window.innerHeight ;
-            target.style.position = 'abusolute' ;
+            target.style.position = 'absolute' ;
             target.style.display = 'block' ;
             let rect = target.getBoundingClientRect() ;
             let left = (width/2)  - (rect.width/2)    ;
